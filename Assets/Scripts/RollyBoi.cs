@@ -6,6 +6,7 @@ public class RollyBoi : MonoBehaviour {
    
 
     public Vector3 force;
+	public bool debug = false;
 	private Rigidbody rb;
 	// Use this for initialization
 	void Start () {
@@ -15,9 +16,8 @@ public class RollyBoi : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Fire1") && debug)
 		{
-      
             rb.AddForce(force);
 		}
 	}

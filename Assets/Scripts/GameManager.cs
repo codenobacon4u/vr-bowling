@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject pinRack;
 	public GameObject ball;
 	public string scene;
+	public Vector3 pos;
 
     public Text scoreText;
     public static int score = 0;
@@ -25,21 +26,22 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         setOfPins = Instantiate(pinRack, pinPos);
         pins = setOfPins.GetComponentsInChildren<Transform>();
+		NewGame();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire2"))
+		if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             Reset();
         }
 		if (Input.GetButtonDown("Fire3"))
 		{
-			Instantiate(pinRack, transform);
+			//Instantiate(pinRack, transform);
 		}
-		if (Input.GetButtonDown("Fire4"))
+		if (OVRInput.GetDown(OVRInput.Button.Three))
 		{
-			Instantiate(ball, transform);
+			Instantiate(ball, pos, Quaternion.identity);
 		}
 		/*
 		 * This will need to be changed in order to allow for multiple rolls in one frame
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene(scene);
 		setOfPins = Instantiate(pinRack, pinPos);
         pins = setOfPins.GetComponentsInChildren<Transform>();
+		NewGame();
     }
 
 	public void NewGame()
