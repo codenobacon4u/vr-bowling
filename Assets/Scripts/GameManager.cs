@@ -9,14 +9,17 @@ public class GameManager : MonoBehaviour {
 
 	public Transform pinPos;
 	public GameObject pinRack;
-	public GameObject pinRack1;
+	public GameObject ball;
 	public string scene;
 
     public Text scoreText;
     public static int score = 0;
+	public int fallen = 0;
 
     private Transform[] pins;
     private GameObject setOfPins;
+
+	private ScoreManager scoreboard;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +39,7 @@ public class GameManager : MonoBehaviour {
 		}
 		if (Input.GetButtonDown("Fire4"))
 		{
-			Instantiate(pinRack1, transform);
+			Instantiate(ball, transform);
 		}
 		/*
 		 * This will need to be changed in order to allow for multiple rolls in one frame
@@ -52,6 +55,19 @@ public class GameManager : MonoBehaviour {
         scoreText.text = "Pins knoncked down: " + score;
 	}
 
+	public IEnumerator CountPins()
+	{
+		yield return new WaitForSeconds(3f);
+		foreach (Transform pin in pins)
+		{
+			if (pin.GetComponent<PinniBoy>().hasFallen)
+			{
+				fallen++;
+			}
+		}
+		scoreboard.SetFrame(0, fallen, 0);
+	}
+	
 	public void Reset()
 	{
 		SceneManager.LoadScene(scene);
@@ -67,6 +83,6 @@ public class GameManager : MonoBehaviour {
 		 * or start a new game whenever the current game is over.
 		 */
 		 //Creates a new scoreboard, called every time we need to track score for a player
-		ScoreManager scoreboard = new ScoreManager();
+		scoreboard = new ScoreManager();
 	}
 }

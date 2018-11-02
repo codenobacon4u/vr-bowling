@@ -8,6 +8,6 @@ PhysicMaterial:
   m_Name: Slippery boi
   dynamicFriction: 0.1
   staticFriction: 0.1
-  bounciness: 0.5
+  bounciness: 0.1
   frictionCombine: 2
   bounceCombine: 0
