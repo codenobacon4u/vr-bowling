@@ -16,7 +16,7 @@ public class RollyBoi : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (Input.GetButtonDown("Fire1") && debug)
+		if (OVRInput.GetDown(OVRInput.Button.One) && debug)
 		{
             rb.AddForce(force);
 		}

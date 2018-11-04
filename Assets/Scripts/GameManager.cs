@@ -14,18 +14,27 @@ public class GameManager : MonoBehaviour {
 	public Vector3 pos;
 
     public Text scoreText;
-    public static int score = 0;
+	public Text pinsText;
+	public Text rollText;
+	public Text boardText;
+	public static int score = 0;
 	public int fallen = 0;
+	public int rolls;
+	public int frameI;
+	public float time = 0;
 
-    private Transform[] pins;
-    private GameObject setOfPins;
+    private PinniBoy[] pins;
+	private Transform pr;
+    private GameObject rack;
 
 	private ScoreManager scoreboard;
 
 	// Use this for initialization
 	void Start () {
-        setOfPins = Instantiate(pinRack, pinPos);
-        pins = setOfPins.GetComponentsInChildren<Transform>();
+        rack = Instantiate(pinRack, pinPos);
+        pr = rack.GetComponentInChildren<Transform>();
+		pins = pr.GetComponentsInChildren<PinniBoy>();
+		Debug.Log(pins[0].hasFallen);
 		NewGame();
 	}
 	
@@ -47,36 +56,52 @@ public class GameManager : MonoBehaviour {
 		 * This will need to be changed in order to allow for multiple rolls in one frame
 		 * and to keep track of what frame we're in so we know where to put the scores
 		 */
-		foreach (Transform pin in pins)
-        {
-            if (pin.GetComponent<PinniBoy>().hasFallen)
-            {
-                score++;
-            }
-        }
-        scoreText.text = "Pins knoncked down: " + score;
+		//Rolls();
+		boardText.text = scoreboard.PrintScoreboard();
+	}
+
+	public void Roll()
+	{
+		StartCoroutine(CountPins());
 	}
 
 	public IEnumerator CountPins()
 	{
-		yield return new WaitForSeconds(3f);
-		foreach (Transform pin in pins)
+		rolls++;
+		fallen = 0;
+		yield return new WaitForSecondsRealtime(time);
+		foreach(PinniBoy p in pins)
 		{
-			if (pin.GetComponent<PinniBoy>().hasFallen)
+			
+			if (p.hasFallen)
 			{
 				fallen++;
+			} else
+			{
 			}
 		}
-		scoreboard.SetFrame(0, fallen, 0);
+		if (rolls == 1)
+		{
+			scoreboard.SetFrame(frameI, fallen, 0);
+		}
+		else if (rolls == 2)
+		{
+			Destroy(rack.gameObject);
+			scoreboard.AddFrame(frameI, 0, fallen);
+			frameI++;
+			rolls = 0;
+			rack = Instantiate(pinRack, pinPos);
+		}
+		if (frameI == 10) frameI = 0;
+		scoreText.text = "Frame: " + frameI;
+		pinsText.text = "Pins: " + fallen;
+		rollText.text = "Roll: " + scoreboard.Frames();
 	}
 	
 	public void Reset()
 	{
 		SceneManager.LoadScene(scene);
-		setOfPins = Instantiate(pinRack, pinPos);
-        pins = setOfPins.GetComponentsInChildren<Transform>();
-		NewGame();
-    }
+	}
 
 	public void NewGame()
 	{

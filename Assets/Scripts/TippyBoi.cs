@@ -9,7 +9,7 @@ public class TippyBoi : MonoBehaviour {
     AudioSource audioSource;
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
 	private void OnTriggerEnter(Collider other)
@@ -17,8 +17,8 @@ public class TippyBoi : MonoBehaviour {
         
         if (other.tag == "Floor")
 		{
-            impact.Play();
-            Destroy(transform.parent.gameObject, 1f);
+            audioSource.Play();
+            Destroy(transform.parent.gameObject, 4f);
             transform.parent.gameObject.GetComponent<PinniBoy>().hasFallen = true;
         }
 	}

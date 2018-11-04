@@ -38,6 +38,12 @@ namespace bowlingscoring
 			Update();
 		}
 
+		public void AddFrame(int index, int roll1, int roll2)
+		{
+			Frame curr = frames[index];
+			curr.AddScore(roll1, roll2);
+		}
+
 		//Updates scores for each frame
 		private void Update()
 		{
@@ -95,32 +101,38 @@ namespace bowlingscoring
 		 * NOTE: Where there is a commented out Console.Write(... we need to put the code to update the on screen score.
 		 * (Don't worry about Console.WriteLine(), that was just a formatting thing while I was testing.
 		 */
-		public void PrintScoreboard()
+		public string PrintScoreboard()
 		{
+			string board = "";
 			for (int i = 0; i < frames.Count; i++)
 			{
 				if (frames[i].isStrike)
 				{
 					if (i < frames.Count - 1 && frames[i + 1].scores[1] == 0)
 					{
+						board += "[ ]";
 						//Console.Write("[ ]");
 						continue;
 					}
 					else if (frames[i].scores[1] == 0)
 					{
+						board += "[ ]";
 						//Console.Write("[ ]");
 						continue;
 					}
 				}
 				else if (frames[i].isSpare && i == frames.Count - 1)
 				{
+					board += "[ ]";
 					//Console.Write("[ ]");
 					continue;
 				}
+				board += "[" + ScoreFromRange(i) + "]";
 				//Console.Write("[" + ScoreFromRange(i) + "]");
 
 			}
 			//Console.WriteLine();
+			return board;
 		}
 
 		// Gets the current score from the first frame to the specified frame.
@@ -160,6 +172,11 @@ namespace bowlingscoring
 			}
 
 			Update();
+		}
+
+		public int Frames()
+		{
+			return frames.Count;
 		}
 	}
 }

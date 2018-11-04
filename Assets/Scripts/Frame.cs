@@ -25,6 +25,8 @@ namespace bowlingscoring
 		{
 			scores[0] = s1;
 			scores[1] = s2;
+			if (scores[0] == 10) isStrike = true;
+			else if (scores[0] + scores[1] == 10) isSpare = true;
 			total = scores[2] = s1 + s2;
 		}
 

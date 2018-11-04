@@ -13,9 +13,10 @@ public class BallReturn : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.Equals(ball))
+		if (other.gameObject.CompareTag("Ball"))
 		{
-			StartCoroutine(gameManager.GetComponent<GameManager>().CountPins());
+			Destroy(other.gameObject);
+			gameManager.GetComponent<GameManager>().Roll();
 		}
 	}
 }
