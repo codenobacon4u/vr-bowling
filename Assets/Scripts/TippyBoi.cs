@@ -18,7 +18,7 @@ public class TippyBoi : MonoBehaviour {
         if (other.tag == "Floor")
 		{
             audioSource.Play();
-            Destroy(transform.parent.gameObject, 4f);
+            //Destroy(transform.parent.gameObject, 4f);
             transform.parent.gameObject.GetComponent<PinniBoy>().hasFallen = true;
         }
 	}

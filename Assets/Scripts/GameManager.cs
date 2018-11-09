@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public Transform pinPos;
 	public GameObject pinRack;
 	public GameObject ball;
+	public GameObject dBall;
 	public string scene;
 	public Vector3 pos;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour {
 	public int rolls;
 	public int frameI;
 	public float time = 0;
+
+	public bool debug = false;
 
     private PinniBoy[] pins;
 	private Transform pr;
@@ -36,6 +39,11 @@ public class GameManager : MonoBehaviour {
 		pins = pr.GetComponentsInChildren<PinniBoy>();
 		Debug.Log(pins[0].hasFallen);
 		NewGame();
+		if (debug)
+		{
+			pos = new Vector3(0f, 0.5f, 0f);
+			ball = dBall;
+		}
 	}
 	
 	// Update is called once per frame
@@ -48,15 +56,10 @@ public class GameManager : MonoBehaviour {
 		{
 			//Instantiate(pinRack, transform);
 		}
-		if (OVRInput.GetDown(OVRInput.Button.Three))
+		if (OVRInput.GetDown(OVRInput.Button.Three) || Input.GetButtonDown("Fire1"))
 		{
 			Instantiate(ball, pos, Quaternion.identity);
 		}
-		/*
-		 * This will need to be changed in order to allow for multiple rolls in one frame
-		 * and to keep track of what frame we're in so we know where to put the scores
-		 */
-		//Rolls();
 		boardText.text = scoreboard.PrintScoreboard();
 	}
 
@@ -76,6 +79,7 @@ public class GameManager : MonoBehaviour {
 			if (p.hasFallen)
 			{
 				fallen++;
+				Destroy(p.gameObject);
 			} else
 			{
 			}
