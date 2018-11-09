@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4330939794239810}
   - component: {fileID: 33168668055437248}
   - component: {fileID: 23810461236583982}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 11741_shoes_v1_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4228194857236492}
   - component: {fileID: 33875104074916890}
   - component: {fileID: 23318872999450264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 11741_shoes_v1_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4922478505690430}
-  m_Layer: 0
+  - component: {fileID: 54596394934398814}
+  - component: {fileID: 65857877263258960}
+  - component: {fileID: 114088602609272438}
+  m_Layer: 12
   m_Name: shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,8 +96,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819491528493352}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalPosition: {x: 1, y: 0.772, z: 0.607}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 4228194857236492}
   - {fileID: 4330939794239810}
@@ -185,3 +188,46 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1507745770046652}
   m_Mesh: {fileID: 4300000, guid: 493b22810e9c3874f910020f96be71eb, type: 3}
+--- !u!54 &54596394934398814
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819491528493352}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65857877263258960
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819491528493352}
+  m_Material: {fileID: 13400000, guid: 2d85f38df845a344dbdad62f48ced27a, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 5}
+  m_Center: {x: 0, y: 0, z: 2.5}
+--- !u!114 &114088602609272438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1819491528493352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints: []

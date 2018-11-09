@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour {
 		if (frameI == 10) frameI = 0;
 		scoreText.text = "Frame: " + frameI;
 		pinsText.text = "Pins: " + fallen;
-		rollText.text = "Roll: " + scoreboard.Frames();
+		rollText.text = "Roll: " + rolls;
 	}
 	
 	public void Reset()
